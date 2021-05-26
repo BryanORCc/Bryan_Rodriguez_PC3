@@ -1,0 +1,48 @@
+@model List<Producto>
+
+<h1>Lista de Productos Buscados</h1>
+
+<table class="table border">
+    <tr>
+        <th>Id</th>
+        <th>Nombre del Producto</th>
+        <th>Foto del Producto</th>
+        <th>Descripcion</th>
+        <th>Precio</th>
+        <th>Celular</th>
+        <th>Lugar de Compra</th>
+        <th>Nombre del Comprador</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.NombreProducto</td>
+            <td><img src="@item.Foto" width="200px"> </td>
+            <td>@item.Descripcion</td>
+            <td>@item.Precio</td>
+            <td>@item.Celular</td>
+            <td>@item.LugarCompra</td>
+            <td>@item.NombreComprador</td>
+
+            <td>
+                <a href="/Busqueda/ModificarProducto/@item.Id" class="btn btn-secondary">Modificar</a>
+
+                <form action="/Busqueda/EliminarProducto" method="post" class="d-inline-block">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button class="btn btn-danger">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+    }
+    @if (Model.Count == 0) {
+        <tr>
+            <td colspan="12" class="text-center">
+                <h3 style="color: blue;"> Aun no tenemos productos registrados</h3>
+                <h3 style="color: lightslategrey;"> Se el primero, es muy facil</h3>
+            </td>
+        </tr>
+    }
+</table>
+
+<a href="/Busqueda/RegistrarProducto" class="btn btn-primary">Añadir Producto Nuevo</a>
